@@ -1,9 +1,70 @@
-fetch('https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={your_api_key}')
-    .then(response => response.json())
-    .then(data => {
-        // Process the weather data here
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+const apikey = 'b1d37a48ccb7f9d8312823944d366698';
+const searchCity = document.getElementById('searchCity');
+const searchBtn = document.getElementById('searchBtn');
+const baseURL = 'https://api.openweathermap.org/data/2.5/forecast';
+
+// add an event listener to the search button and search for the desired city
+searchBtn.addEventListener('click', () => {
+    const city = searchCity.value;
+    const url = `${baseURL}?q=${city}&appid=${apikey}&units=metric`; 
+
+    getWeatherData(url)
+        .then(data => console.log(data))
+        .catch(error => console.log('Error:', error)); 
+});
+
+// fetch the weather data from the open weather API
+function getWeatherData(url) { 
+    return fetch(url) 
+        .then(response => response.json())
+        .then(data => {
+            const {city, list} = data;
+            const {name} = city;
+            const {main, weather} = list[0];
+            const {temp, humidity} = main;
+            const {description} = weather[0];
+            console.log(`City: ${name}`);
+            console.log(`Temperature: ${temp}°C`);
+            console.log(`Humidity: ${humidity}%`);
+            console.log(`Description: ${description}`);
+
+            // append these weather values to the DOM
+            const currentWeather = document.getElementById('currentWeather');
+            const weatherCard = createWeatherCard(name, temp, humidity, description);
+            currentWeather.appendChild(weatherCard);
+        })
+        .catch(error => console.log('Error:', error));
+}
+
+// create a weather card element
+function createWeatherCard(name, temp, humidity, description) {
+    const weatherCard = document.createElement('div');
+    weatherCard.classList.add('card');
+
+    const cardContent = document.createElement('div');
+    cardContent.classList.add('card-content');
+
+    const cityName = document.createElement('p');
+    cityName.textContent = `City: ${name}`;
+
+    const temperature = document.createElement('p');
+    temperature.textContent = `Temperature: ${temp}°C`;
+
+    const humidityLevel = document.createElement('p');
+    humidityLevel.textContent = `Humidity: ${humidity}%`;
+
+    const weatherDescription = document.createElement('p');
+    weatherDescription.textContent = `Description: ${description}`;
+
+    cardContent.appendChild(cityName);
+    cardContent.appendChild(temperature);
+    cardContent.appendChild(humidityLevel);
+    cardContent.appendChild(weatherDescription);
+
+    const currentWeather = document.getElementById('currentWeather');
+    currentWeather.appendChild(weatherCard);
+
+    weatherCard.appendChild(cardContent);
+
+    return weatherCard;
+}

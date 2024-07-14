@@ -30,9 +30,9 @@
         <aside>
             <h2>Search for a city</h2>
             <div class="pt-2 relative mx-auto text-gray-600">
-                <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                <input id="searchCity" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                 type="search" name="search" placeholder="Search">
-                <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                <button id="searchBtn" type="submit" class="absolute right-0 top-0 mt-5 mr-4">
                 <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
                     viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
@@ -44,21 +44,30 @@
             </div>
             <br>
             <hr>
-            <br>
-            <ul>
+            <ul id="searchHistory">
                 <li></li>
             </ul>
         </aside>
-        <section>
-            <div id="currentWeather" class="object-fill">
-                <h2 id="location">Location (date)</h2>
-                <p id="temperature"></p>
-                <p id="humidity"></p>
-                <p id="windSpeed"></p>
+        <section id="weatherDisplay">
+            <div class="object-fill">
+                <div id="currentWeather"  class="antialiased min-h-screen bg-gray-100 flex items-center">
+  
+                    <div class="w-full max-w-sm mx-auto">
+                      <div class="bg-white shadow rounded-lg p-5 dark:bg-gray-800 w-full">
+                
             </div>
 
             <div id="forecastWeather">
 
+            </div>
+            <div id="fiveDayWeather">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
         </section>
     </main>
