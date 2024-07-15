@@ -21,14 +21,17 @@
 
     <title>Weather Forecast</title>
 </head>
-<body>
-    <header>
-        <h1>Weather Dashboard</h1>
-        <hr>
+<body class="bg-gray-100">
+    <header class="bg-gradient-to-r from-blue-700 to-blue-400 border-b-4 border-indigo-900 border-opacity-50">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <div class="flex items-center flex-1">
+                <h1 class="text-gray-100 text-5xl text-center font-sans font-bold">Weather Dashboard</h1>
+            </div>
+        </nav>
     </header>
     <main class="inline-flex">
         <aside>
-            <h2>Search for a city</h2>
+            <h2 class="font-sans font-bold text-l text-gray-600">Search for a city</h2>
             <div class="pt-2 relative mx-auto text-gray-600">
                 <input id="searchCity" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                 type="search" name="search" placeholder="Search">
@@ -44,31 +47,13 @@
             </div>
             <br>
             <hr>
-            <ul id="searchHistory">
+            <ul id="searchHistory" class="border-r-4 border-gray-300">
                 <li></li>
             </ul>
         </aside>
         <section id="weatherDisplay">
             <div class="object-fill">
-                <div id="currentWeather"  class="antialiased min-h-screen bg-gray-100 flex items-center">
-  
-                    <div class="w-full max-w-sm mx-auto">
-                      <div class="bg-white shadow rounded-lg p-5 dark:bg-gray-800 w-full">
-                
-            </div>
-
-            <div id="forecastWeather">
-
-            </div>
-            <div id="fiveDayWeather">
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
+                <div id="currentWeather"  class="antialiased min-h-screen shadow-lg flex items-center">
         </section>
     </main>
 

@@ -23,10 +23,10 @@ function getWeatherData(url) {
             const {main, weather} = list[0];
             const {temp, humidity} = main;
             const {description} = weather[0];
-            console.log(`City: ${name}`);
+            console.log(`Location: ${name}`);
             console.log(`Temperature: ${temp}°C`);
             console.log(`Humidity: ${humidity}%`);
-            console.log(`Description: ${description}`);
+            console.log(`${description}`);
 
             // append these weather values to the DOM
             const currentWeather = document.getElementById('currentWeather');
@@ -54,7 +54,7 @@ function createWeatherCard(name, temp, humidity, description) {
     humidityLevel.textContent = `Humidity: ${humidity}%`;
 
     const weatherDescription = document.createElement('p');
-    weatherDescription.textContent = `Description: ${description}`;
+    weatherDescription.textContent = `${description}`;
 
     cardContent.appendChild(cityName);
     cardContent.appendChild(temperature);
