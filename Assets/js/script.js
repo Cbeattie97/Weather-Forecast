@@ -9,15 +9,13 @@ searchBtn.addEventListener('click', () => {
     const url = `${baseURL}?q=${city}&appid=${apikey}&units=metric`; 
 
     getWeatherData(url)
-        .then(data => console.log(data))
-        .catch(error => console.log('Error:', error)); 
 });
 
 // fetch the weather data from the open weather API
 function getWeatherData(url) { 
-    return fetch(url) 
+ fetch(url) 
         .then(response => response.json())
-        .then(data => {
+        .then(data => { console.log(data);
             const {city, list} = data;
             const {name} = city;
             const {main, weather} = list[0];
@@ -32,6 +30,12 @@ function getWeatherData(url) {
             const currentWeather = document.getElementById('currentWeather');
             const weatherCard = createWeatherCard(name, temp, humidity, description);
             currentWeather.appendChild(weatherCard);
+
+            for (let i=0;i< list.length; i+=8) {
+                const forecastWeatherCard =createWeatherCard(list[i].main.temp, list[i].main.humidity, list[i].weather[0].description);
+                const forecastWeather = document.getElementById('forecastWeather');
+                forecastWeather.appendChild(forecastWeatherCard);
+        }
         })
         .catch(error => console.log('Error:', error));
 }
@@ -54,17 +58,15 @@ function createWeatherCard(name, temp, humidity, description) {
     humidityLevel.textContent = `Humidity: ${humidity}%`;
 
     const weatherDescription = document.createElement('p');
-    weatherDescription.textContent = `${description}`;
+    weatherDescription.textContent = description ? `${description}` : '';
 
     cardContent.appendChild(cityName);
     cardContent.appendChild(temperature);
     cardContent.appendChild(humidityLevel);
     cardContent.appendChild(weatherDescription);
 
-    const currentWeather = document.getElementById('currentWeather');
-    currentWeather.appendChild(weatherCard);
-
     weatherCard.appendChild(cardContent);
 
     return weatherCard;
 }
+
