@@ -21,6 +21,7 @@ function getWeatherData(url) {
             const {main, weather} = list[0];
             const {temp, humidity} = main;
             const {description} = weather[0];
+            const {speed} = list[0].wind;
             console.log(`Location: ${name}`);
             console.log(`Temperature: ${temp}°C`);
             console.log(`Humidity: ${humidity}%`);
@@ -28,11 +29,11 @@ function getWeatherData(url) {
 
             // append these weather values to the DOM
             const currentWeather = document.getElementById('currentWeather');
-            const weatherCard = createWeatherCard(name, temp, humidity, description);
+            const weatherCard = createWeatherCard(name, temp, humidity, speed, description);
             currentWeather.appendChild(weatherCard);
-
+console.log(list);
             for (let i=0;i< list.length; i+=8) {
-                const forecastWeatherCard =createWeatherCard(list[i].main.temp, list[i].main.humidity, list[i].weather[0].description);
+                const forecastWeatherCard =createWeatherCard(list[i].main.temp, list[i].main.humidity, list[i].wind.speed);
                 const forecastWeather = document.getElementById('forecastWeather');
                 forecastWeather.appendChild(forecastWeatherCard);
         }
@@ -41,7 +42,7 @@ function getWeatherData(url) {
 }
 
 // create a weather card element
-function createWeatherCard(name, temp, humidity, description) {
+function createWeatherCard( temp, humidity, wind) {
     const weatherCard = document.createElement('div');
     weatherCard.classList.add('card');
 
@@ -49,13 +50,45 @@ function createWeatherCard(name, temp, humidity, description) {
     cardContent.classList.add('card-content');
 
     const cityName = document.createElement('p');
-    cityName.textContent = `City: ${name}`;
+    cityName.textContent = `Temperature: ${temp}°C`;
+
+    const temperature = document.createElement('p');
+    temperature.textContent = `Humidity: ${humidity}%`;
+
+    const humidityLevel = document.createElement('p');
+    humidityLevel.textContent = `Wind Speed: ${wind}M/Hr`;
+
+    const weatherDescription = document.createElement('p');
+    // weatherDescription.textContent = description ? `${description}` : '';
+
+    cardContent.appendChild(cityName);
+    cardContent.appendChild(temperature);
+    cardContent.appendChild(humidityLevel);
+    // cardContent.appendChild(weatherDescription);
+
+    weatherCard.appendChild(cardContent);
+
+    return weatherCard;
+}
+
+function createCurrentWeatherCard(name, temp, humidity, speed, description) {
+    const weatherCard = document.createElement('div');
+    weatherCard.classList.add('card');
+
+    const cardContent = document.createElement('div');
+    cardContent.classList.add('card-content');
+
+    const cityName = document.createElement('p');
+    cityName.textContent = `Name: ${name}`;
 
     const temperature = document.createElement('p');
     temperature.textContent = `Temperature: ${temp}°C`;
 
     const humidityLevel = document.createElement('p');
     humidityLevel.textContent = `Humidity: ${humidity}%`;
+
+    const speed = document.createElement('p');
+    humidityLevel.textContent = `Wind Speed: ${speed}M/Hr`;
 
     const weatherDescription = document.createElement('p');
     weatherDescription.textContent = description ? `${description}` : '';
@@ -69,4 +102,5 @@ function createWeatherCard(name, temp, humidity, description) {
 
     return weatherCard;
 }
+
 

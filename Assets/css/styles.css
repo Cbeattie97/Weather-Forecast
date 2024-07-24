@@ -58,3 +58,10 @@
   min-width: 100%;
   min-height: 100%;
 } */
+
+.card{
+    margin-top: 20px;
+    border: solid grey 1px;
+    min-width: 100%;
+    min-height: 100%;
+}
